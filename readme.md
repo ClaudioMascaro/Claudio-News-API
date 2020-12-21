@@ -1,0 +1,1 @@
+API REST que cuidará de toda a lógica e persistência dos e-mails da newsletter do projeto ClaudioNews
