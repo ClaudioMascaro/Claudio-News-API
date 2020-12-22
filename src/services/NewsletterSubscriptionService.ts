@@ -1,5 +1,6 @@
 import mongoose from '../database'
 import '../models/Mailing'
+import { emailSchema } from '../config/validationSchemas'
 
 const Mailing = mongoose.model("Mailing")
 
@@ -7,9 +8,12 @@ const Mailing = mongoose.model("Mailing")
 export default class NewsletterService {
   async subscribe (email: string) {
     try {
+      const validateEmail = emailSchema.validate({email})
+      if (validateEmail.error) {
+        throw new Error
+      }
       const mailing = new Mailing ({email: email})
-      await mailing.save()
-      return mailing
+      return await mailing.save()   
     }
     catch (err) {
       throw new Error(err)
