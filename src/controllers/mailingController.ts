@@ -14,5 +14,14 @@ export default class Newsletter {
       throw new Error(err)
     }
   }
-}
 
+  async find () {
+    try {
+      const mailing = Mailing.find()
+      return mailing
+    }
+    catch (err) {
+      throw new Error(err)
+    }
+  }
+}
