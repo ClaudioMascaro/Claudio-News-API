@@ -3,11 +3,9 @@ import Newsletter from '../controllers/mailingController'
 
 const newsletterRouter = Router()
 
-const newsletterSubscription = new Newsletter().include
-const newsletterSearch = new Newsletter().find
 
-newsletterRouter.post('/', newsletterSubscription)
+newsletterRouter.post('/', Newsletter.include)
 
-newsletterRouter.get('/', newsletterSearch)
+newsletterRouter.get('/', Newsletter.find)
 
 export default newsletterRouter

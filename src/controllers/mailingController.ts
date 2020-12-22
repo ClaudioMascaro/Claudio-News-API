@@ -2,12 +2,11 @@ import NewsletterService from '../services/NewsletterSubscriptionService'
 import { Request, Response } from 'express'
 
 
-export default class Newsletter {
+export default new class Newsletter {
   async include (request: Request, response: Response) {
     try {
       const { email } = request.body	
-      const emailInclude = new NewsletterService()
-      await emailInclude.subscribe(email)
+      await NewsletterService.subscribe(email)
     return response.status(201).json({ message: "E-mail cadastrado com sucesso!"})
   }
   catch (err) {
@@ -18,8 +17,7 @@ export default class Newsletter {
 
   async find (request: Request, response: Response) {
     try {
-      const newsletterSubscription = new NewsletterService()
-      const mailing = await newsletterSubscription.find()
+      const mailing = await NewsletterService.find()
       const Response = response.status(200).json(mailing)
       return Response
     }

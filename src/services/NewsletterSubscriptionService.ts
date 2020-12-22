@@ -4,7 +4,7 @@ import '../models/Mailing'
 const Mailing = mongoose.model("Mailing")
 
 
-export default class NewsletterService {
+export default new class NewsletterService {
   async subscribe (email: string) {
     try {
       const mailing = new Mailing ({email: email})
