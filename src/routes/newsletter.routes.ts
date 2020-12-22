@@ -15,5 +15,15 @@ newsletterRouter.post('/', async (req, res) =>{
   }
 })
 
+newsletterRouter.get('/', async (req, res) =>{
+  try {
+    const newsletterSubscription = new Newsletter()
+    const mailing = await newsletterSubscription.find()
+    res.status(200).json(mailing)
+  }
+  catch (err) {
+    res.status(400)
+  }
+})
 
 export default newsletterRouter
