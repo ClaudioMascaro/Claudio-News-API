@@ -1,27 +1,31 @@
-import mongoose from '../database'
-import '../models/Mailing'
+import NewsletterService from '../services/NewsletterSubscriptionService'
+import { Request, Response } from 'express'
 
-const Mailing = mongoose.model("Mailing")
 
 export default class Newsletter {
-  async include (email: string) {
+  async include (request: Request, response: Response) {
     try {
-      const mailing = new Mailing ({email: email})
-      await mailing.save()
-      return mailing
-    }
-    catch (err) {
-      throw new Error(err)
-    }
+      const { email } = request.body	
+      const emailInclude = new NewsletterService()
+      await emailInclude.subscribe(email)
+    return response.status(201).json({ message: "E-mail cadastrado com sucesso!"})
   }
+  catch (err) {
+    const Response = response.status(400).json({ message: "E-mail invalido ou já cadastrado!" })
+    return Response
+  }
+}
 
-  async find () {
+  async find (request: Request, response: Response) {
     try {
-      const mailing = Mailing.find()
-      return mailing
+      const newsletterSubscription = new NewsletterService()
+      const mailing = await newsletterSubscription.find()
+      const Response = response.status(200).json(mailing)
+      return Response
     }
     catch (err) {
-      throw new Error(err)
+      const Response = response.status(400)
+      return Response
     }
   }
 }
