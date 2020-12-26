@@ -1,7 +1,6 @@
 import NewsletterService from '../services/NewsletterSubscriptionService'
 import { Request, Response } from 'express'
 
-
 export default new class Newsletter {
   async include (request: Request, response: Response) {
     try {
@@ -10,8 +9,7 @@ export default new class Newsletter {
     return response.status(201).json({ message: "E-mail cadastrado com sucesso!"})
   }
   catch (err) {
-    const Response = response.status(400).json({ message: "E-mail invalido ou já cadastrado!" })
-    return Response
+    return response.status(400).json('E-mail inválido ou já cadastrado')
   }
 }
 
