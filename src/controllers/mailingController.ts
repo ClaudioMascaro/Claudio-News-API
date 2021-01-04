@@ -3,14 +3,9 @@ import { Request, Response } from 'express'
 
 
 interface Results {
-  next?: {
-    page: number,
-    limit: number
-  },
-  previous?: {
-    page: number,
-    limit: number
-  },
+  next?: number 
+  previous?: number 
+  limit?: number 
   results?: Array<object>
 }
 
@@ -38,18 +33,16 @@ export default new class Newsletter {
 
       if (endIndex < await NewsletterService.count()
       ) {
-        results.next = {
-          page: page + 1,
-          limit: limit
+        results.next = page + 1
+        results.limit = limit
         }
-      } 
+       
       
       if (startIndex > 0) {
-        results.previous = {
-          page: page - 1,
-          limit: limit
+        results.previous = page - 1
+        results.limit = limit
         }
-      }
+      
       results.results = await NewsletterService.find(limit, sortBy, order, startIndex)
       return response.status(200).json(results)
     }
