@@ -24,8 +24,17 @@ export default new class NewsletterService {
     }
   }
 
-  async find (limit?: number, sortBy?: string, order?: number, startIndex?: number) {
+  async find (limit?: number, 
+    sortBy?: string, 
+    order?: number, 
+    startIndex?: number, 
+    searchTerm?: string) {
     try { 
+
+      if (searchTerm) {
+        return await Mailing.find({'email': { "$regex": searchTerm, "$options": "i" }})
+      }
+
       return await Mailing.find()
       .limit(limit)
       .skip(startIndex)
@@ -33,6 +42,14 @@ export default new class NewsletterService {
       .exec()
     }
     catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async delete (emailToDelete: string) {
+    try{
+      return await Mailing.deleteOne({'email': emailToDelete})
+    } catch (err) {
       throw new Error(err)
     }
   }
