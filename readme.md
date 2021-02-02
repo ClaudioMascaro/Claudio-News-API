@@ -9,7 +9,8 @@ git clone https://github.com/ClaudioMascaro/Claudio-News-API.git
 ```
 
 ## Para configurar o ambiente:
-# Docker
+### Docker
+
 Crie um arquivo .env seguindo o modelo .env.example, insira o DB_NAME e a SERVER_PORT que vai utilizar. Pode manter o DB_HOST=db e DB_PORT=27017
 
 Para configurar os containers utilizando o Makefile, utilize o seguinte comando:
@@ -38,7 +39,8 @@ E para ver os logs: `make logs` ou `docker-compose logs -f`
 
 Já pode utilizar os recursos!
 
-# Local
+### Local
+
 Se quiser configurar e utilizar a API no ambiente local, após clonar o repositório, utilize:
 
 ```
