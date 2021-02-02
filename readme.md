@@ -77,6 +77,7 @@ Busca de registros.
 Filtros (opcionais): 
 - `?page=&limit=` Limite e paginação
 - `?sortby=&order=` Ordenação por 'email' ou 'createdAt'
+- `?search=` Busca por termo
 
 Exemplos de uso:
 
@@ -85,6 +86,8 @@ Exemplos de uso:
 - GET `/newsletter?page=1&limit=10&sortby=email&order=1` retorna os resultados da primeira página, limitando a 10 registros por página, e ordenados de 0-9a-z.
 
 - GET `/newsletter?sortby=createdAt&order=-1` retorna os resultados do registro mais recente ao mais antigo. 
+
+- GET `/newsletter?search=TESTE` retorna os registros que contenham 'teste' no email.
 
 ### POST /newsletter
 
